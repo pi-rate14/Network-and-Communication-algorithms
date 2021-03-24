@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <math.h>
-int input[32];
-int code[32];
-int ham_calc(int,int);
-void Receiver(int,int);
+for (int i = 31; i >= mask; i--)
+    // {
+    //     bits[i] = '0';
+    // }
