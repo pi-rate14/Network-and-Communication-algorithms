@@ -3,6 +3,27 @@ using namespace ::std;
 
 string binDec = "";
 string decBin = "";
+string maskString = "";
+
+int convertMask(int n)
+{
+    int num = n;
+    int dec_value = 0;
+    int base = 1;
+
+    int temp = num;
+    while (temp)
+    {
+        int last_digit = temp % 10;
+        temp = temp / 10;
+
+        dec_value += last_digit * base;
+
+        base = base * 2;
+    }
+
+    return dec_value;
+}
 
 string complement(string bits)
 {
@@ -39,17 +60,14 @@ void binToDecimal(string n)
     binDec = binDec + s + '.';
 }
 
-void NoOfAddress(string bits, int mask)
+void FirstAddress(string bits, string mask)
 {
-    int difference = 32 - mask;
-    cout << "Number of addresses: " << pow(2, difference) << endl;
-}
-
-void FirstAddress(string bits, int mask)
-{
-    for (int i = 31; i > mask; i--)
+    for (int i = 0; i < 32; i++)
     {
-        bits[i] = '0';
+        if (bits[i] != mask[i])
+        {
+            bits[i] = '0';
+        }
     }
     int j = 0;
     string block = "";
@@ -66,12 +84,15 @@ void FirstAddress(string bits, int mask)
     cout << "First Address : " << binDec << endl;
     binDec = "";
 }
-
-void LastAddress(string bits, int mask)
+void LastAddress(string bits, string mask)
 {
-    for (int i = 31; i > mask; i--)
+    mask = complement(mask);
+    for (int i = 0; i < 32; i++)
     {
-        bits[i] = '1';
+        if (bits[i] == '0' && mask[i] == '1')
+        {
+            bits[i] = '1';
+        }
     }
     int j = 0;
     string block = "";
@@ -87,6 +108,13 @@ void LastAddress(string bits, int mask)
     binDec[binDec.length() - 1] = ' ';
     cout << "Last Address : " << binDec << endl;
     binDec = "";
+}
+void NoOfAddress(string bits, string mask)
+{
+    mask = complement(mask);
+    int maskNum = atoi(mask.c_str());
+    maskNum = convertMask(maskNum);
+    cout << "Number of addresses: " << maskNum + 1 << endl;
 }
 
 int decToBinary(int n)
@@ -110,6 +138,16 @@ int main()
     string maskBits = "";
     maskBits = maskBits + IP[IP.length() - 2] + IP[IP.length() - 1];
     int mask = atoi(maskBits.c_str());
+    for (int x = 0; x < mask; x++)
+    {
+        maskString += '1';
+    }
+    int remBits = 32 - mask;
+    while (remBits)
+    {
+        maskString += '0';
+        remBits--;
+    }
     int i = 0, ctr = 0, j = 0;
     while (i < IP.length() - 3)
     {
@@ -135,13 +173,13 @@ int main()
         switch (choice)
         {
         case 1:
-            FirstAddress(decBin, mask);
+            FirstAddress(decBin, maskString);
             break;
         case 2:
-            LastAddress(decBin, mask);
+            LastAddress(decBin, maskString);
             break;
         case 3:
-            NoOfAddress(decBin, mask);
+            NoOfAddress(decBin, maskString);
             break;
         default:
             cout << "Thanks for choosing ";
