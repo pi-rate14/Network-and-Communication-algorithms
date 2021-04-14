@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1618390911 source:d:\documents\projects1\netcom lab\socket programming\socket_programming\client.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ws2tcpip.h>
+	<winsock2.h>
+
+1618390852 source:d:\documents\projects1\netcom lab\socket programming\socket_programming\server.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/types.h>
+	<ws2tcpip.h>
+	<winsock2.h>
+
