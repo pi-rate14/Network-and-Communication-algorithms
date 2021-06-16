@@ -1,4 +1,2 @@
-for (int i = 31; i >= mask; i--)
-    // {
-    //     bits[i] = '0';
-    // }
+cout << "Enter the number of generator bits : ";
+    cin >> r;

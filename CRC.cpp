@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <string.h>
 using namespace std;
 void division(int temp[], int gen[], int n, int r)
 {
@@ -58,15 +59,16 @@ int modify(int message[], int n, int r, int gen[])
 void sender()
 {
     int n, r, message[50], gen[50], temp[50], choice = 0;
+    string genPoly;
     cout << "At Sender's End " << endl;
     cout << "Enter the number of message bits : ";
     cin >> n;
     cout << "Enter the number of generator bits : ";
     cin >> r;
-    cout << "Enter the message : ";
+    cout << "Enter the message with a space between the bits : ";
     for (int i = 0; i < n; i++)
         cin >> message[i];
-    cout << "Enter the generator : ";
+    cout << "Enter the generator with a space between the bits: ";
     for (int i = 0; i < r; i++)
         cin >> gen[i];
     r--;
